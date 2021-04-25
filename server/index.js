@@ -10,9 +10,10 @@ const db = mysql.createConnection({
 	user: 'admin',
 	host: 'database-1.cras78dsqc40.us-east-1.rds.amazonaws.com',
 	password: 'adminfucker',
-	database: 'employeeSysten'
+	database: '435Project'
 });
 
+/*
 app.post('/create', (req, res)=>{
 	const name = req.body.name;
 	const age = req.body.age;
@@ -32,9 +33,11 @@ app.post('/create', (req, res)=>{
 		}
 	);
 });
+*/
 
-app.get('/employees', (req, res)=>{
-	db.query('SELECT * FROM employees', (err, result)=>{
+//standard gets per table
+app.get('/getassets', (req, res)=>{
+	db.query('SELECT a_tag, a_type, serial_no, brand, model, w_expire FROM asset_info', (err, result)=>{
 		if(err){
 			console.log(err);
 		}else{
@@ -43,6 +46,27 @@ app.get('/employees', (req, res)=>{
 	});
 });
 
+app.get('/getstudents', (req, res)=>{
+	db.query('SELECT * FROM student_info', (err, result)=>{
+		if(err){
+			console.log(err);
+		}else{
+			res.send(result);
+		}
+	});
+});
+
+app.get('/getemployees', (req, res)=>{
+	db.query('SELECT * FROM employee_info', (err, result)=>{
+		if(err){
+			console.log(err);
+		}else{
+			res.send(result);
+		}
+	});
+});
+
+/*
 app.put('/update', (req, res) =>{
 	const id = req.body.id;
 	const wage = req.body.wage;
@@ -69,7 +93,7 @@ app.delete('/delete/:id', (req, res) =>{
 		}
 	});	
 });
-
+*/
 app.listen(3001, ()=>{
 	console.log("Yay, your server is running on port 3001");
 });

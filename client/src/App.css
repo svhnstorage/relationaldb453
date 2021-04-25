@@ -30,14 +30,7 @@ button:hover {
 	cursor: pointer;
 }
 
-.employees{
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	width: 100%;
-}
-
-.employee{
+.tableentrydiv{
 	width: 700px;
 	height: auto;
 	border: 1px solid black;
@@ -46,7 +39,3 @@ button:hover {
 	padding: 10px;
 }
 
-.employee h3{
-	margin: 20px;
-
-}
