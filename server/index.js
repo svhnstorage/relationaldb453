@@ -13,17 +13,18 @@ const db = mysql.createConnection({
 	database: '435Project'
 });
 
-/*
+
 app.post('/create', (req, res)=>{
-	const name = req.body.name;
-	const age = req.body.age;
-	const country = req.body.country;
-	const position = req.body.position;
-	const wage = req.body.wage;
+	const assettag = req.body.assettag;
+	const assettype = req.body.assettype;
+	const serialno = req.body.serialno;
+	const brand = req.body.brand;
+	const model = req.body.model;
+	const warrentyexpire = req.body.warrentyexpire;
 
 	db.query(
-		'INSERT INTO employees (name, age, country, position, wage) VALUES (?, ?, ?, ?, ?)', 
-		[name, age, country, position, wage], 
+		'INSERT INTO asset_info (a_tag, a_type, serial_no, brand, model, w_expire) VALUES (?, ?, ?, ?, ?, ?)', 
+		[assettag, assettype, serialno, brand, model, warrentyexpire], 
 		(err, result) => {
 			if(err){
 				console.log(err);
@@ -33,7 +34,7 @@ app.post('/create', (req, res)=>{
 		}
 	);
 });
-*/
+
 
 //standard gets per table
 app.get('/getassets', (req, res)=>{
@@ -102,10 +103,10 @@ app.put('/update', (req, res) =>{
 		}
 	);
 });
-
-app.delete('/delete/:id', (req, res) =>{
+*/
+app.delete('/deleteasset/:id', (req, res) =>{
 	const id = req.params.id
-	db.query('DELETE FROM employees WHERE id = ?', id, (err, result) =>{
+	db.query('DELETE FROM asset_info WHERE a_tag = ?', id, (err, result) =>{
 		if(err){
 			console.log(err);
 		}else{
@@ -113,7 +114,7 @@ app.delete('/delete/:id', (req, res) =>{
 		}
 	});	
 });
-*/
+
 app.listen(3001, ()=>{
 	console.log("Yay, your server is running on port 3001");
 });
