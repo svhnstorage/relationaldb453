@@ -103,7 +103,7 @@ app.get('/getemployees', (req, res)=>{
 });
 
 app.get('/getloansemployee', (req, res)=>{
-	db.query('SELECT employee_asset.a_tag, employee_asset.e_id, (SELECT use_type FROM asset_info WHERE employee_asset.a_tag = asset_info.a_tag) FROM employee_asset', (err, result)=>{
+	db.query('SELECT employee_asset.a_tag, employee_asset.e_id, asset_info.use_type FROM employee_asset INNER JOIN asset_info ON employee_asset.a_tag = asset_info.a_tag', (err, result)=>{
 		if(err){
 			console.log(err);
 		}else{
@@ -113,7 +113,7 @@ app.get('/getloansemployee', (req, res)=>{
 });
 
 app.get('/getloansstudent', (req, res)=>{
-	db.query('SELECT student_asset.a_tag, student_asset.s_id, (SELECT use_type FROM asset_info WHERE student_asset.a_tag = asset_info.a_tag) FROM student_asset', (err, result)=>{
+	db.query('SELECT student_asset.a_tag, student_asset.s_id, asset_info.use_type FROM student_asset INNER JOIN asset_info ON student_asset.a_tag = asset_info.a_tag', (err, result)=>{
 		if(err){
 			console.log(err);
 		}else{
