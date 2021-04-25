@@ -5,18 +5,18 @@ import Axios from 'axios';
 
 function Asset(){
 
-  const[assettag, setAssettag] = useState('');
-  const[assettype, setAssettype] = useState('');
-  const[serialno, setSerialno] = useState('');
-  const[brand, setBrand] = useState('');
-  const[model, setModel] = useState('');
-  const[warrentyexpire, setWarrentyexpire] = useState('');
+  const[assettag, setAssettag] = useState('AC000000');
+  const[assettype, setAssettype] = useState('LAPTOP');
+  const[serialno, setSerialno] = useState('NXSHEAA0064411BB7B7601');
+  const[brand, setBrand] = useState('ACER');
+  const[model, setModel] = useState('C720-2955');
+  const[warrentyexpire, setWarrentyexpire] = useState('12/12/12');
 
 
   const[assetList, setAssetList] = useState([]);
 
   const addAsset = () => {
-    Axios.post('http://localhost:3001/create', {
+    Axios.post('http://localhost:3001/createasset', {
       assettag: assettag, 
       assettype: assettype, 
       serialno: serialno, 
@@ -34,7 +34,7 @@ function Asset(){
     });
   };
 
-  const deleteEmployee = (id) => {
+  const deleteAsset = (id) => {
     Axios.delete(`http://localhost:3001/deleteasset/${id}`).then((response) =>{
       getAssets();
     });
@@ -107,7 +107,7 @@ function Asset(){
                 </div>
                 <div>
                   <button 
-                    onClick={()=>{deleteEmployee(val.a_tag);}}> Delete </button>
+                    onClick={()=>{deleteAsset(val.a_tag);}}> Delete </button>
                 </div>
               </div>
             );
