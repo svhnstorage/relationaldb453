@@ -66,6 +66,26 @@ app.get('/getemployees', (req, res)=>{
 	});
 });
 
+app.get('/getloansemployee', (req, res)=>{
+	db.query('SELECT employee_asset.a_tag, employee_asset.e_id, (SELECT use_type FROM asset_info WHERE employee_asset.a_tag = asset_info.a_tag) FROM employee_asset', (err, result)=>{
+		if(err){
+			console.log(err);
+		}else{
+			res.send(result);
+		}
+	});
+});
+
+app.get('/getloansstudent', (req, res)=>{
+	db.query('SELECT student_asset.a_tag, student_asset.s_id, (SELECT use_type FROM asset_info WHERE student_asset.a_tag = asset_info.a_tag) FROM student_asset', (err, result)=>{
+		if(err){
+			console.log(err);
+		}else{
+			res.send(result);
+		}
+	});
+});
+
 /*
 app.put('/update', (req, res) =>{
 	const id = req.body.id;
