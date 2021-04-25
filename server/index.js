@@ -53,6 +53,24 @@ app.post('/createstudent', (req, res)=>{
 	);
 });
 
+app.post('/createemployee', (req, res)=>{
+	const eid = req.body.eid;
+	const ename = req.body.ename;
+	const ephone = req.body.ephone;
+
+	db.query(
+		'INSERT INTO employee_info (e_id, e_name, e_phone) VALUES (?, ?, ?)', 
+		[eid, ename, ephone], 
+		(err, result) => {
+			if(err){
+				console.log(err);
+			}else{
+				res.send("Values inserted");
+			}
+		}
+	);
+});
+
 //standard gets per table
 app.get('/getassets', (req, res)=>{
 	db.query('SELECT a_tag, a_type, serial_no, brand, model, w_expire FROM asset_info', (err, result)=>{
@@ -135,6 +153,17 @@ app.delete('/deleteasset/:id', (req, res) =>{
 app.delete('/deletestudent/:id', (req, res) =>{
 	const id = req.params.id
 	db.query('DELETE FROM student_info WHERE s_id = ?', id, (err, result) =>{
+		if(err){
+			console.log(err);
+		}else{
+			res.send(result);
+		}
+	});	
+});
+
+app.delete('/deleteemployee/:id', (req, res) =>{
+	const id = req.params.id
+	db.query('DELETE FROM employee_info WHERE e_id = ?', id, (err, result) =>{
 		if(err){
 			console.log(err);
 		}else{
