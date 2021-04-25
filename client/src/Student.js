@@ -18,7 +18,7 @@ function Student(){
     <div>
       <div><h1>this is where form goes</h1></div>
       <div>
-        <button onClick={getStudents}>Show Employees</button>
+        <button onClick={getStudents}>Show Students</button>
         
         {studentList.map((val, key) => {
           return (

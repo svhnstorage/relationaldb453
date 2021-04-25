@@ -19,7 +19,7 @@ function Asset(){
     <div>
       <div><h1>this is where form goes</h1></div>
       <div>
-        <button onClick={getAssets}>Show Employees</button>
+        <button onClick={getAssets}>Show Assets</button>
         
         {assetList.map((val, key) => {
           return (
