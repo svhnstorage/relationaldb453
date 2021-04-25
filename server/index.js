@@ -14,7 +14,7 @@ const db = mysql.createConnection({
 });
 
 
-app.post('/create', (req, res)=>{
+app.post('/createasset', (req, res)=>{
 	const assettag = req.body.assettag;
 	const assettype = req.body.assettype;
 	const serialno = req.body.serialno;
@@ -35,6 +35,23 @@ app.post('/create', (req, res)=>{
 	);
 });
 
+app.post('/createstudent', (req, res)=>{
+	const sid = req.body.sid;
+	const sname = req.body.sname;
+	const sphone = req.body.sphone;
+
+	db.query(
+		'INSERT INTO student_info (s_id, s_name, s_phone) VALUES (?, ?, ?)', 
+		[sid, sname, sphone], 
+		(err, result) => {
+			if(err){
+				console.log(err);
+			}else{
+				res.send("Values inserted");
+			}
+		}
+	);
+});
 
 //standard gets per table
 app.get('/getassets', (req, res)=>{
@@ -107,6 +124,17 @@ app.put('/update', (req, res) =>{
 app.delete('/deleteasset/:id', (req, res) =>{
 	const id = req.params.id
 	db.query('DELETE FROM asset_info WHERE a_tag = ?', id, (err, result) =>{
+		if(err){
+			console.log(err);
+		}else{
+			res.send(result);
+		}
+	});	
+});
+
+app.delete('/deletestudent/:id', (req, res) =>{
+	const id = req.params.id
+	db.query('DELETE FROM student_info WHERE s_id = ?', id, (err, result) =>{
 		if(err){
 			console.log(err);
 		}else{
