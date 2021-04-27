@@ -9,6 +9,8 @@ function Employee(){
   const[eid, setEid] = useState(19000);
   const[ename, setEname] = useState('Kissma Heini');
   const[ephone, setEphone] = useState('420-1337-69');
+  const[newName, setNewName] = useState('John Cena');
+  const[newPhone, setNewPhone] = useState('420-1337-69');
 
   const getEmployee = () =>{
     Axios.get('http://localhost:3001/getemployees').then((response) =>{
@@ -32,7 +34,21 @@ function Employee(){
     });
   };
 
+  const updateEmployeeName = (id)=>{
+    Axios.put('http://localhost:3001/updateename', {ename: newName, id: id}).then(
+      (response)=>{
+        getEmployee();
+      }
+    );
+  };
 
+  const updateEmployeePhone = (id)=>{
+    Axios.put('http://localhost:3001/updateephone', {ephone: newPhone, id: id}).then(
+      (response)=>{
+        getEmployee();
+      }
+    );
+  };  
 
   return (
     <div>
@@ -71,6 +87,35 @@ function Employee(){
                 <h3>Employee Name: {val.e_name}</h3>
                 <h3>Phone No: {val.e_phone}</h3>
               </div>
+                <div>
+
+                <input 
+                  type="text" 
+                  placeholder = "Enter Name..."
+                  onChange={(event) =>{
+                    setNewName(event.target.value);
+                  }} 
+                />
+                <button 
+                  onClick={()=> {
+                    updateEmployeeName(val.e_id);
+                  }}> Update Name</button>
+
+                <input 
+                  type="text" 
+                  placeholder = "Enter Phone..."
+                  onChange={(event) =>{
+                    setNewPhone(event.target.value);
+                  }} 
+                />
+                <button 
+                  onClick={()=> {
+                    updateEmployeePhone(val.e_id);
+                  }}> Update Phone</button>
+
+                </div>
+
+
               <div>
                 <button 
                     onClick={()=>{deleteEmployee(val.e_id);}}> Delete </button>
