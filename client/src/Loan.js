@@ -25,10 +25,12 @@ function Loan(){
   return (
     <div>
       <LoanNav />
-      <div><h1>this is where form goes</h1></div>
       
       <div>
-        <button onClick={getStudentLoanList}>Show Student Loans</button>
+        <button onClick={()=>{
+          getStudentLoanList()
+          getEmployeeLoanList()
+        }}>Show All Loans</button>
         
         {studentLoanList.map((val, key) => {
           return (
@@ -41,22 +43,18 @@ function Loan(){
             </div>
           );
         })}
-      </div>
 
-      <div>
-        <button onClick={getEmployeeLoanList}>Show Employee Loans</button>
-        
         {employeeLoanList.map((val, key) => {
           return (
             <div className = "tableentrydiv">
               <div>
-              	<h3>Asset Tag: {val.a_tag}</h3>
+                <h3>Asset Tag: {val.a_tag}</h3>
                 <h3>Employee ID: {val.e_id}</h3>
                 <h3>Usage: {val.use_type}</h3>
               </div>
             </div>
           );
-        })}
+        })}        
       </div>
 
     </div>
