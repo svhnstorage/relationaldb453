@@ -8,6 +8,8 @@ import Employee from './Employee';
 import Loan from './Loan';
 import {Route, Link} from 'react-router-dom';
 import NavBar from './NavBar';
+import StudentLoan from './StudenLoan';
+import EmployeeLoan from './EmployeeLoan';
 
 function App(){
   return(
@@ -18,6 +20,8 @@ function App(){
       <Route exact path='/students' component={Student}/>
       <Route exact path='/employees' component={Employee}/>
       <Route exact path='/loans' component={Loan}/>
+      <Route exact path='/studentloan' component={StudentLoan}/>
+      <Route exact path='/employeeloan' component={EmployeeLoan}/>
     </div>
   )
 }
