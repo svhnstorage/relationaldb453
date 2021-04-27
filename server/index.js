@@ -171,6 +171,38 @@ app.put('/updateephone', (req, res) =>{
 	);
 });
 
+
+app.put('/updatesname', (req, res) =>{
+	const id = req.body.id;
+	const sname = req.body.sname;
+	db.query(
+		"UPDATE student_info SET s_name = ? WHERE s_id = ?", 
+		[sname, id], 
+		(err, result)=>{
+			if(err){
+				console.log(err);
+			}else{
+				res.send(result);
+			}
+		}
+	);
+});
+
+app.put('/updatesphone', (req, res) =>{
+	const id = req.body.id;
+	const sphone = req.body.sphone;
+	db.query(
+		"UPDATE student_info SET s_phone = ? WHERE s_id = ?", 
+		[sphone, id], 
+		(err, result)=>{
+			if(err){
+				console.log(err);
+			}else{
+				res.send(result);
+			}
+		}
+	);
+});
 /*
 app.put('/update', (req, res) =>{
 	const id = req.body.id;

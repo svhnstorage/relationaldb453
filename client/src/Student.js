@@ -9,6 +9,9 @@ function Student(){
   const[sid, setSid] = useState(203050000);
   const[sname, setSname] = useState('Ben Dover');
   const[sphone, setSphone] = useState('420-1337-69');
+  const[newName, setNewName] = useState('Randy Orton');
+  const[newPhone, setNewPhone] = useState('420-1777-69');
+
 
   const getStudents = () =>{
     Axios.get('http://localhost:3001/getstudents').then((response) =>{
@@ -31,6 +34,23 @@ function Student(){
       getStudents();
     });
   };
+
+  const updateStudentName = (id)=>{
+    Axios.put('http://localhost:3001/updatesname', {sname: newName, id: id}).then(
+      (response)=>{
+        getStudents();
+      }
+    );
+  };
+
+  const updateStudentPhone = (id)=>{
+    Axios.put('http://localhost:3001/updatesphone', {sphone: newPhone, id: id}).then(
+      (response)=>{
+        getStudents();
+      }
+    );
+  };  
+
 
   return (
     <div>
@@ -70,6 +90,37 @@ function Student(){
                 <h3>Student Name: {val.s_name}</h3>
                 <h3>Phone No: {val.s_phone}</h3>
               </div>
+
+                <div>
+
+                <input 
+                  type="text" 
+                  placeholder = "Enter Name..."
+                  onChange={(event) =>{
+                    setNewName(event.target.value);
+                  }} 
+                />
+                <button 
+                  onClick={()=> {
+                    updateStudentName(val.s_id);
+                  }}> Update Name</button>
+
+                <input 
+                  type="text" 
+                  placeholder = "Enter Phone..."
+                  onChange={(event) =>{
+                    setNewPhone(event.target.value);
+                  }} 
+                />
+                <button 
+                  onClick={()=> {
+                    updateStudentPhone(val.s_id);
+                  }}> Update Phone</button>
+
+                </div>
+
+
+
               <div>
                 <button onClick={()=>{deleteStudent(val.s_id);}}> Delete </button>
               </div>
