@@ -219,6 +219,21 @@ app.put('/updateass', (req, res) =>{
 		}
 	);
 });
+
+app.put('/updateassempl', (req, res) =>{
+	const id = req.body.id;
+	db.query(
+		"UPDATE asset_info SET use_type = 'UNUSED' where asset_info.a_tag = (SELECT a_tag FROM employee_asset WHERE e_id = ?)", 
+		[id], 
+		(err, result)=>{
+			if(err){
+				console.log(err);
+			}else{
+				res.send(result);
+			}
+		}
+	);
+});
 /*
 app.put('/update', (req, res) =>{
 	const id = req.body.id;

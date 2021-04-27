@@ -50,6 +50,15 @@ function Employee(){
     );
   };  
 
+
+  const updateAssetTypeEmpl = (id)=>{
+    Axios.put('http://localhost:3001/updateassempl', {id: id}).then(
+      (response)=>{
+        getEmployee();
+      }
+    );
+  };
+
   return (
     <div>
       <div className="assetform">
@@ -118,7 +127,9 @@ function Employee(){
 
               <div>
                 <button 
-                    onClick={()=>{deleteEmployee(val.e_id);}}> Delete </button>
+                    onClick={()=>{
+                      updateAssetTypeEmpl(val.e_id);
+                      deleteEmployee(val.e_id);}}> Delete </button>
               </div>
             </div>
           );
