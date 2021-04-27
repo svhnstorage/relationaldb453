@@ -51,6 +51,13 @@ function Student(){
     );
   };  
 
+  const updateAssetType = (id)=>{
+    Axios.put('http://localhost:3001/updateass', {id: id}).then(
+      (response)=>{
+        getStudents();
+      }
+    );
+  };
 
   return (
     <div>
@@ -122,7 +129,9 @@ function Student(){
 
 
               <div>
-                <button onClick={()=>{deleteStudent(val.s_id);}}> Delete </button>
+                <button onClick={()=>{
+                  updateAssetType(val.s_id);
+                  deleteStudent(val.s_id);}}> Delete </button>
               </div>
             </div>
           );
