@@ -12,6 +12,8 @@ function Asset(){
   const[model, setModel] = useState('C720-2955');
   const[warrentyexpire, setWarrentyexpire] = useState('12/12/12');
 
+  const[newWExpire, setNewWExpire] = useState('30/12/99');
+
 
   const[assetList, setAssetList] = useState([]);
 
@@ -38,6 +40,14 @@ function Asset(){
     Axios.delete(`http://localhost:3001/deleteasset/${id}`).then((response) =>{
       getAssets();
     });
+  };
+
+  const updateWExpire = (id)=>{
+    Axios.put('http://localhost:3001/updatew', {warrentyexpire: newWExpire, id: id}).then(
+      (response)=>{
+        getAssets();
+      }
+    );
   };
 
 //Asset Tag, Asset Type, Serial No, Brand, Model, Warrenty Expiration
@@ -104,6 +114,21 @@ function Asset(){
                   <h3>Brand: {val.brand}</h3>
                   <h3>Model: {val.model}</h3>
                   <h3>Warranty Expiration: {val.w_expire}</h3>
+                </div>
+                <div>
+
+                <input 
+                  type="text" 
+                  placeholder = "Enter Date..."
+                  onChange={(event) =>{
+                    setNewWExpire(event.target.value);
+                  }} 
+                />
+                <button 
+                  onClick={()=> {
+                    updateWExpire(val.a_tag);
+                  }}> Update </button>
+
                 </div>
                 <div>
                   <button 

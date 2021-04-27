@@ -122,6 +122,24 @@ app.get('/getloansstudent', (req, res)=>{
 	});
 });
 
+
+app.put('/updatew', (req, res) =>{
+	const id = req.body.id;
+	const warrentyexpire = req.body.warrentyexpire;
+	db.query(
+		"UPDATE asset_info SET w_expire = ? WHERE a_tag = ?", 
+		[warrentyexpire, id], 
+		(err, result)=>{
+			if(err){
+				console.log(err);
+			}else{
+				res.send(result);
+			}
+		}
+	);
+});
+
+
 /*
 app.put('/update', (req, res) =>{
 	const id = req.body.id;
