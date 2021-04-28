@@ -34,6 +34,21 @@ function StudentLoan(){
     );
   };  
 
+   const deleteSLOAN = (id) => {
+    Axios.delete(`http://localhost:3001/deletestudentassloan/${id}`).then((response) =>{
+      getStudentLoanList();
+    });
+  };  
+
+  const updateSLOANAssetType = (id)=>{
+    Axios.put('http://localhost:3001/updateSLOANAssetType', {sLoanAss: sLoanAss}).then(
+      (response)=>{
+        getStudentLoanList();
+      }
+    );
+  };
+
+
   return (
     <div>
       <LoanNav />
@@ -75,6 +90,12 @@ function StudentLoan(){
               	<h3>Asset Tag: {val.a_tag}</h3>
                 <h3>Student ID: {val.s_id}</h3>
                 <h3>Usage: {val.use_type}</h3>
+              </div>
+
+              <div>
+                <button onClick={()=>{
+                  updateSLOANAssetType(val.a_tag);
+                  deleteSLOAN(val.a_tag);}}> Delete </button>
               </div>
             </div>
           );

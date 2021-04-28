@@ -269,6 +269,22 @@ app.put('/addnewstudentloanupdateusetype', (req, res) =>{
 	);
 });
 
+
+app.put('/updateSLOANAssetType', (req, res) =>{
+	const id = req.body.id;
+	const sLoanAss = req.body.sLoanAss;
+	db.query(
+		"UPDATE asset_info SET use_type = 'UNUSED' where a_tag = ?", sLoanAss, 
+		(err, result)=>{
+			if(err){
+				console.log(err);
+			}else{
+				res.send(result);
+			}
+		}
+	);
+});
+
 /*
 app.put('/update', (req, res) =>{
 	const id = req.body.id;
@@ -311,6 +327,18 @@ app.delete('/deletestudent/:id', (req, res) =>{
 app.delete('/deleteemployee/:id', (req, res) =>{
 	const id = req.params.id
 	db.query('DELETE FROM employee_info WHERE e_id = ?', id, (err, result) =>{
+		if(err){
+			console.log(err);
+		}else{
+			res.send(result);
+		}
+	});	
+});
+
+
+app.delete('/deletestudentassloan/:id', (req, res) =>{
+	const id = req.params.id
+	db.query('DELETE FROM student_asset WHERE a_tag = ?', id, (err, result) =>{
 		if(err){
 			console.log(err);
 		}else{
