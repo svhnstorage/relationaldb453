@@ -49,7 +49,7 @@ function NavBar(){
 				{
 					padding: "10px 16px"
 				}
-			}><Link to ='/assets'
+			}><Link to ='/assetshome'
 				style={
 					{
 						padding: "14px 16px",

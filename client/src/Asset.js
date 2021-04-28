@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from 'react';
 import Axios from 'axios';
-
+import AssetNav from './AssetNav';
 
 function Asset(){
 
@@ -53,6 +53,7 @@ function Asset(){
 //Asset Tag, Asset Type, Serial No, Brand, Model, Warrenty Expiration
   return (
     <div>
+      <AssetNav />
       <div className="assetform">
         <label>Asset Tag:</label>
         <input 
