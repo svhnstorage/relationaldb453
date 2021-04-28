@@ -121,7 +121,7 @@ app.get('/getassets', (req, res)=>{
 
 //standard gets per table
 app.get('/getassetsavail', (req, res)=>{
-	db.query('SELECT a_tag, a_type, dev_stat FROM asset_info', (err, result)=>{
+	db.query("SELECT a_tag, a_type, dev_stat, use_type FROM asset_info WHERE use_type = 'UNUSED' AND dev_stat != 'REPAIR'", (err, result)=>{
 		if(err){
 			console.log(err);
 		}else{
