@@ -119,6 +119,17 @@ app.get('/getassets', (req, res)=>{
 	});
 });
 
+//standard gets per table
+app.get('/getassetsavail', (req, res)=>{
+	db.query('SELECT a_tag, a_type, dev_stat FROM asset_info', (err, result)=>{
+		if(err){
+			console.log(err);
+		}else{
+			res.send(result);
+		}
+	});
+});
+
 app.get('/getstudents', (req, res)=>{
 	db.query('SELECT * FROM student_info', (err, result)=>{
 		if(err){
