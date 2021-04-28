@@ -6,6 +6,10 @@ import LoanNav from './LoanNav';
 function StudentLoan(){
 
   const[studentLoanList, setStudentLoanList] = useState([]);
+  const[sLoanAss, setsLoanAss] = useState('AC000000');
+  const[sLoanId, setsLoanId] = useState(22222);
+  const[sLoanUse, setsLoanUse] = useState('REMOTE');
+
 
   const getStudentLoanList = () =>{
     Axios.get('http://localhost:3001/getloansstudent').then((response) =>{
@@ -13,10 +17,54 @@ function StudentLoan(){
     });
   };
 
+  const addStudentLoan = () => {
+    Axios.post('http://localhost:3001/addnewstudentloan', {
+      sLoanAss: sLoanAss,
+      sLoanId: sLoanId,
+    }).then(() =>{
+      getStudentLoanList();
+    });
+  };
+
+  const updateStudentAssetLoan = ()=>{
+    Axios.put('http://localhost:3001/addnewstudentloanupdateusetype', {sLoanUse: sLoanUse, sLoanAss: sLoanAss}).then(
+      (response)=>{
+        getStudentLoanList();
+      }
+    );
+  };  
+
   return (
     <div>
       <LoanNav />
-      <div><h1>this is where form goes</h1></div>
+      <div className="assetform">
+        <label>Asset Tag:</label>
+        <input 
+          type="text" 
+          onChange={(event) => {
+            setsLoanAss(event.target.value);
+          }}
+        />
+        <label>Student ID:</label>
+        <input 
+          type="number" 
+          onChange={(event) => {
+            setsLoanId(event.target.value);
+          }}
+        />
+        <label>Usage:</label>
+        <input 
+          type="text" 
+          onChange={(event) => {
+            setsLoanUse(event.target.value);
+          }}
+        />
+        <button onClick={()=>{
+            updateStudentAssetLoan();
+            addStudentLoan(); 
+          }}>Add Student Loan</button>
+      </div>
+
       <div>
         <button onClick={getStudentLoanList}>Show Student Loans</button>
         

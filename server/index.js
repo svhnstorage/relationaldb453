@@ -71,6 +71,24 @@ app.post('/createemployee', (req, res)=>{
 	);
 });
 
+
+app.post('/addnewstudentloan', (req, res)=>{
+	const sLoanAss = req.body.sLoanAss;
+	const sLoanId = req.body.sLoanId;
+
+	db.query(
+		'INSERT INTO student_asset(a_tag,s_id) VALUES (?, ?)', 
+		[sLoanAss, sLoanId], 
+		(err, result) => {
+			if(err){
+				console.log(err);
+			}else{
+				res.send("Values inserted");
+			}
+		}
+	);
+});
+
 //standard gets per table
 app.get('/getassets', (req, res)=>{
 	db.query('SELECT a_tag, a_type, serial_no, brand, model, w_expire FROM asset_info', (err, result)=>{
@@ -234,6 +252,23 @@ app.put('/updateassempl', (req, res) =>{
 		}
 	);
 });
+
+app.put('/addnewstudentloanupdateusetype', (req, res) =>{
+	const sLoanUse = req.body.sLoanUse;
+	const sLoanAss = req.body.sLoanAss;
+	db.query(
+		"UPDATE asset_info SET use_type = ? WHERE a_tag = ?", 
+		[sLoanUse, sLoanAss], 
+		(err, result)=>{
+			if(err){
+				console.log(err);
+			}else{
+				res.send(result);
+			}
+		}
+	);
+});
+
 /*
 app.put('/update', (req, res) =>{
 	const id = req.body.id;
