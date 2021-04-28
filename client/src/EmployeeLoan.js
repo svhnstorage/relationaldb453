@@ -17,13 +17,13 @@ function EmployeeLoan(){
   };
 
    const deleteELOAN = (id) => {
-    Axios.delete(`http://localhost:3001/deletestudentassloan/${id}`).then((response) =>{
+    Axios.delete(`http://localhost:3001/deleteemployeeassloan/${id}`).then((response) =>{
       getEmployeeLoanList();
     });
   };  
 
   const updateELOANAssetType = (id)=>{
-    Axios.put('http://localhost:3001/updateSLOANAssetType', {eLoanAss: eLoanAss}).then(
+    Axios.put('http://localhost:3001/updateELOANAssetType', {eLoanAss: eLoanAss}).then(
       (response)=>{
         getEmployeeLoanList();
       }
@@ -92,6 +92,12 @@ function EmployeeLoan(){
               	<h3>Asset Tag: {val.a_tag}</h3>
                 <h3>Student ID: {val.e_id}</h3>
                 <h3>Usage: {val.use_type}</h3>
+              </div>
+
+              <div>
+                <button onClick={()=>{
+                  updateELOANAssetType(val.a_tag);
+                  deleteELOAN(val.a_tag);}}> Delete </button>
               </div>
             </div>
           );

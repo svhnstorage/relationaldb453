@@ -381,6 +381,18 @@ app.delete('/deletestudentassloan/:id', (req, res) =>{
 	});	
 });
 
+
+app.delete('/deleteemployeeassloan/:id', (req, res) =>{
+	const id = req.params.id
+	db.query('DELETE FROM employee_asset WHERE a_tag = ?', id, (err, result) =>{
+		if(err){
+			console.log(err);
+		}else{
+			res.send(result);
+		}
+	});	
+});
+
 app.listen(3001, ()=>{
 	console.log("Yay, your server is running on port 3001");
 });
